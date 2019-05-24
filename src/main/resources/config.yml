@@ -1,0 +1,13 @@
+send-msg: true
+msg: "&6You are so lucky!"
+blocks:
+  # block namespaced id
+  emerald_ore:
+    -
+      # command (@p = player)
+      cmd: "give @p 382 2"
+      # probability (0-1)
+      pr: 0.0005
+    -
+      cmd: "give @p 450 1"
+      pr: 0.0002
