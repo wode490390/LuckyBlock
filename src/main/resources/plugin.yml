@@ -1,12 +1,13 @@
 main: cn.wode490390.nukkit.luckyblock.LuckyBlock
 name: "LuckyBlock"
-description: "Lucky block plugin for Nukkit"
+description: "LuckyBlock plugin for Nukkit"
 author: "wode490390"
 website: "http://wode490390.cn/"
 version: "${pom.version}"
-api: ["1.0.0"]
+api: ["1.0.8"]
 load: POSTWORLD
+
 permissions:
   luckyblock.trigger:
-    description: "Allows player to trigger lucky block"
+    description: "Allows a player to trigger the lucky block"
     default: true

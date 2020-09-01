@@ -1,10 +1,15 @@
 send-msg: true
 msg: "&6You are so lucky!"
+
+send-animation: true
+animation-id: 3
+
 blocks:
   # block namespaced id
+  # see https://minecraft.gamepedia.com/Bedrock_Edition_data_values#Block_IDs
   emerald_ore:
     -
-      # command (@p = player)
+      # command (@p = player's name)
       cmd: "give @p 382 2"
       # probability (0-1)
       pr: 0.0005
