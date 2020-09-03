@@ -7,7 +7,7 @@
 [![Servers](https://img.shields.io/bstats/servers/4839)](https://bstats.org/plugin/bukkit/LuckyBlock/4839)
 [![Players](https://img.shields.io/bstats/players/4839)](https://bstats.org/plugin/bukkit/LuckyBlock/4839)-->
 
-The customizable LuckyBlock plugin for Nukkit servers.
+Customizable LuckyBlock plugin for Nukkit servers
 
 ![](https://i.loli.net/2019/05/24/5ce745b82a0a470870.gif)
 
@@ -27,9 +27,9 @@ send-animation: true
 animation-id: 3
 
 blocks:
-  # block namespaced id
+  # block namespaced ID or number ID
   # see https://minecraft.gamepedia.com/Bedrock_Edition_data_values#Block_IDs
-  emerald_ore:
+  emerald_ore: # namespaced ID
     -
       # command (@p = player's name)
       cmd: "give @p 382 2"
@@ -38,6 +38,9 @@ blocks:
     -
       cmd: "give @p 450 1"
       pr: 0.0002
+  "95": # number ID
+    - cmd: "say example :)"
+      pr: 0.00000001
 ```
 </details>
 

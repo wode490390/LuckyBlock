@@ -5,9 +5,9 @@ send-animation: true
 animation-id: 3
 
 blocks:
-  # block namespaced id
+  # block namespaced ID or legacy (number) ID
   # see https://minecraft.gamepedia.com/Bedrock_Edition_data_values#Block_IDs
-  emerald_ore:
+  emerald_ore: # namespaced ID
     -
       # command (@p = player's name)
       cmd: "give @p 382 2"
@@ -16,3 +16,6 @@ blocks:
     -
       cmd: "give @p 450 1"
       pr: 0.0002
+  "95": # legacy ID
+    - cmd: "say example :)"
+      pr: 0.00000001

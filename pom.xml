@@ -7,7 +7,7 @@
     <groupId>cn.wode490390.nukkit</groupId>
     <artifactId>luckyblock</artifactId>
     <packaging>jar</packaging>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <name>LuckyBlock</name>
     <description>LuckyBlock plugin for Nukkit</description>
     <url>http://wode490390.cn/</url>

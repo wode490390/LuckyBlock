@@ -18,6 +18,7 @@ import cn.nukkit.utils.Config;
 import cn.nukkit.utils.TextFormat;
 import cn.wode490390.nukkit.luckyblock.block.BlockIdentifiers;
 import cn.wode490390.nukkit.luckyblock.util.MetricsLite;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 
@@ -31,7 +32,7 @@ public class LuckyBlock extends PluginBase implements Listener, CommandSender {
     private boolean sendMessage;
     private String message;
     private boolean sendAnimation;
-    private final Map<Integer, List<Entry>> blocks = new Int2ObjectOpenHashMap<>();
+    private final Int2ObjectMap<List<Entry>> blocks = new Int2ObjectOpenHashMap<>();
 
     private PermissibleBase perm;
 
@@ -84,7 +85,15 @@ public class LuckyBlock extends PluginBase implements Listener, CommandSender {
             }
 
             if (!list.isEmpty()) {
-                Integer id = BlockIdentifiers.MAPPING.get(key);
+                Integer id;
+                try {
+                    id = Integer.valueOf(key);
+                    if (BlockIdentifiers.MAPPING.inverse().get(id) == null) {
+                        throw new IllegalArgumentException("Unknown block ID");
+                    }
+                } catch (Exception e) {
+                    id = BlockIdentifiers.MAPPING.get(key);
+                }
                 if (id != null) {
                     this.blocks.put(id, list);
                 } else {
@@ -140,12 +149,14 @@ public class LuckyBlock extends PluginBase implements Listener, CommandSender {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
+        int mode = player.getGamemode();
         int id = event.getBlock().getId();
-        if (player.getGamemode() == Player.SURVIVAL && player.hasPermission("luckyblock.trigger") && this.blocks.containsKey(id)) {
+        List<Entry> entries;
+        if ((mode == Player.SURVIVAL || mode == Player.ADVENTURE) && player.hasPermission("luckyblock.trigger") && (entries = this.blocks.get(id)) != null) {
             boolean success = false;
 
             Random random = ThreadLocalRandom.current();
-            for (Entry entry : this.blocks.get(id)) {
+            for (Entry entry : entries) {
                 if (entry.probability > random.nextDouble()) {
                     try {
                         this.getServer().dispatchCommand(this, entry.command.replace("@p", player.getName()).replace("@s", player.getName()));
@@ -224,12 +235,12 @@ public class LuckyBlock extends PluginBase implements Listener, CommandSender {
 
     @Override
     public void sendMessage(String message) {
-
+        //NOOP
     }
 
     @Override
     public void sendMessage(TextContainer message) {
-
+        //NOOP
     }
 
     @Override
@@ -239,7 +250,7 @@ public class LuckyBlock extends PluginBase implements Listener, CommandSender {
 
     @Override
     public void setOp(boolean value) {
-
+        //NOOP
     }
 
     private void logLoadException(String node, Throwable t) {
